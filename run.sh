@@ -14,7 +14,7 @@ if [ ! -d ~/openwrt/bin ]; then
     git clone 'https://github.com/ALSe61/openwrt-r3p-mtk.git'
     #git clone 'https://github.com/Azexios/openwrt-r3p-mtk.git'
     mkdir files
-    cp -f $git/.config .
+    
 else
     cd openwrt
 fi
@@ -22,6 +22,7 @@ fi
 ./scripts/feeds update -a && \
 ./scripts/feeds install -a
 
+cp -f $git/.config .
 rsync -av --delete  $git/files/ $HOME/openwrt/files
 rsync -av  openwrt-r3p-mtk/ . --exclude '.git'
 
