@@ -22,14 +22,9 @@ fi
 ./scripts/feeds install -a
 
 if [ ! -e ./.config ]; then
-    if [ ! -e $git/.config ]; then
-        wget -O ./.config 'https://raw.githubusercontent.com/ALSe61/openwrt-actions/main/.config'
-    else
-        cp -f $git/.config .
-    fi
+   cp -f $git/.config ./.config
 fi
-
-rsync --delete -av "$git/files/" "$HOME/openwrt/files"
+rsync -av --delete  $git/files/ $HOME/openwrt/files
 rsync -av  openwrt-r3p-mtk/ . --exclude '.git'
 
 make defconfig
