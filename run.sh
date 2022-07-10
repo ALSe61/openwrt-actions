@@ -3,7 +3,7 @@
 repo="https://git.openwrt.org/openwrt/openwrt.git"
 git="$HOME/git"
 branch="openwrt-22.03"
-tag="v22.03.0-rc4"
+tag="v22.03.0-rc5"
 
 if [ ! -d ~/openwrt/bin ]; then
     git clone $repo -b $branch
