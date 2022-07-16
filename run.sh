@@ -29,12 +29,12 @@ rsync -av  openwrt-r3p-mtk/ . --exclude '.git'
 make defconfig
 make clean
 make menuconfig
-make world -j5 || make -j1 V=s
+make world -j5 || make -j5 V=s
 
 if [ $? = 0 ]; then
     ./scripts/diffconfig.sh > $git/.config
 
-    ROM_NAME="$(find ./bin/*/*/ -type f -name '*-sysupgrade.bin' -printf "%f\n")"
+    ROM_NAME="$(find ./bin/*/*/ -type f -name '*-factory.bin' -printf "%f\n")"
     ROM_PATH="$(find ./bin/*/*/ -type f -name $ROM_NAME -print)"
     DIR_ROM="$(dirname $ROM_PATH)"
     sudo chmod -R 750 $DIR_ROM
