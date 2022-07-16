@@ -32,8 +32,9 @@ make menuconfig
 make world -j5 || make -j5 V=s
 
 if [ $? = 0 ]; then
-    ./scripts/diffconfig.sh > $git/.config
-
+    ./scripts/diffconfig.sh > diffconfig
+    [ "$(cmp diffconfig $git/.config)" = true ] || cat diffconfig > $git/.config
+    
     ROM_NAME="$(find ./bin/*/*/ -type f -name '*-factory.bin' -printf "%f\n")"
     ROM_PATH="$(find ./bin/*/*/ -type f -name $ROM_NAME -print)"
     DIR_ROM="$(dirname $ROM_PATH)"
